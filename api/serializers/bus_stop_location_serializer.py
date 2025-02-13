@@ -1,4 +1,4 @@
-from api.models import BusLocation
+from ..models import BusLocation
 from rest_framework import serializers
 
 

@@ -33,6 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETTIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME" : timedelta(days=1),
