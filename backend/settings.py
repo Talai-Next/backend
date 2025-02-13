@@ -33,6 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETTIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME" : timedelta(days=1),
@@ -142,5 +143,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGIN = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
 CORS_ALLOW_CREDENTIALS = True
