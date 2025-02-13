@@ -15,6 +15,6 @@ class LineThreeRoute(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.station.name} -> {self.next_station.name if self.next_station else 'End'}"
+        return f"{self.station_code} - {self.name}"
 
 

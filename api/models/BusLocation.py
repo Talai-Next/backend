@@ -7,4 +7,4 @@ class BusLocation(models.Model):
     longitude = models.FloatField(verbose_name="Longitude")
 
     def __str__(self):
-        return f"{self.building_code} - {self.name}"
+        return f"{self.station_code} - {self.name}"
