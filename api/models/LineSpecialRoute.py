@@ -15,5 +15,6 @@ class LineSpecialRoute(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.station_code} - {self.name}"
+        return f"{self.station.name}"
+
 
