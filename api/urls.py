@@ -1,10 +1,10 @@
 from django.urls import include, path
-from rest_framework import routers
-from . import views
-router = routers.DefaultRouter()
-router.register(r'line-one', views.LineOneRouteViewSet)
-router.register(r'line-special', views.LineSpecailRouteViewSet)
+from .views import BusStopLocationView, LineSpecailRouteView, LineOneRouteView
+
 urlpatterns = [
-    path('', include(router.urls)),
+    path('line-one/', LineOneRouteView.as_view()),
+    path('line-special/', LineSpecailRouteView.as_view()),
+    path('bus-stop-location/', BusStopLocationView.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
+
