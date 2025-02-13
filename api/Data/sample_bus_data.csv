@@ -1,0 +1,59 @@
+Step,Node Name,Instruction,Distance,Latitude,Longitude
+0,อาคารเรียนและปฏิบัติการกายวิภาคศาสตร์,You have arrived at your destination,0,13.84547,100.57612
+1,Navigation,Head south,117,13.84547,100.57612
+2,Navigation,Make a slight left,155.7,13.84448,100.57651
+3,Navigation,Make a U-turn,172.1,13.8438,100.57777
+4,คณะเทคนิคการแพทย์,You have arrived at your 1st destination,0,13.84462,100.57645
+5,Navigation,Head northwest,123.6,13.84462,100.57645
+6,Navigation,Turn right,201.2,13.84567,100.57606
+7,Navigation,Make a U-turn,201.2,13.84671,100.57739
+8,Navigation,Turn left,23,13.84567,100.57606
+9,อาคารเรียนและปฏิบัติการกายวิภาคศาสตร์,You have arrived at your 2nd destination,0,13.84547,100.57612
+10,Navigation,Head south,100.6,13.84547,100.57612
+11,คณะวนศาสตร์,You have arrived at your 3rd destination,0,13.84462,100.57645
+12,Navigation,Head southeast,16.4,13.84462,100.57645
+13,Navigation,Make a slight left,155.7,13.84448,100.57651
+14,Navigation,Make a U-turn,704.6,13.8438,100.57777
+15,Navigation,Turn right,177,13.84616,100.5725
+16,สำนักหอสมุด,You have arrived at your 4th destination,0,13.84776,100.5725
+17,Navigation,Head north,259.2,13.84776,100.5725
+18,คณะเกษตร,You have arrived at your 5th destination,0,13.8501,100.57251
+19,Navigation,Head north,168.5,13.8501,100.57251
+20,อาคารพุทธเกษตร,You have arrived at your 6th destination on the left,0,13.85162,100.57251
+21,Navigation,Head north,51.1,13.85162,100.57251
+22,โรงอาหารกลาง 2,You have arrived at your 7th destination,0,13.85208,100.57252
+23,Navigation,Head north,46.6,13.85208,100.57252
+24,Navigation,Turn right,701.2,13.8525,100.57254
+25,Navigation,Turn right onto ถนนทวีศักดิ์เสสะเวศ,86.1,13.85337,100.57836
+26,อาคารศูนย์อาหาร,You have arrived at your 8th destination on the left,0,13.85347,100.57915
+27,Navigation,Head east on ถนนทวีศักดิ์เสสะเวศ,145.3,13.85347,100.57915
+28,Navigation,Turn right onto ซอยพหลโยธิน 45,75,13.85364,100.58049
+29,หอพักนิสิต ซอยพหลโยธิน 45,You have arrived at your 9th destination,0,13.85296,100.58056
+30,Navigation,Head south on ซอยพหลโยธิน 45,48.2,13.85296,100.58056
+31,Navigation,Turn right,98.1,13.85253,100.58061
+32,Navigation,Turn right,34.7,13.85248,100.57971
+33,Navigation,Make a U-turn,34.7,13.85279,100.57968
+34,Navigation,Turn left,98.1,13.85248,100.57971
+35,Navigation,Turn left onto ซอยพหลโยธิน 45,123.2,13.85253,100.58061
+36,Navigation,Turn left onto ถนนทวีศักดิ์เสสะเวศ,124.6,13.85364,100.58049
+37,หอพักหญิง,You have arrived at your 10th destination on the left,0,13.85349,100.57934
+38,Navigation,Head west on ถนนทวีศักดิ์เสสะเวศ,106.8,13.85349,100.57934
+39,Navigation,Turn left,28.2,13.85337,100.57836
+40,อาคารสวัสดิการ มก.,You have arrived at your destination,0,13.85311,100.57839
+41,Navigation,Head south,201.4,13.85311,100.57839
+42,อาคารสวัสดิการ สป. กษ.,You have arrived at your destination,0,13.85253,100.5769
+43,Navigation,Head west,471.5,13.85253,100.5769
+44,Navigation,Turn left,108.7,13.8525,100.57254
+45,โรงอาหารกลาง 2 (ตรงข้าม),You have arrived at your destination,0,13.85153,100.5726
+46,Navigation,Head south,121.6,13.85153,100.5726
+47,อาคารพุทธเกษตร (ตรงข้าม),You have arrived at your destination,0,13.85043,100.57259
+48,Navigation,Head south,187.3,13.85043,100.57259
+49,คณะเกษตร (ตรงข้าม),You have arrived at your destination,0,13.84874,100.57259
+50,Navigation,Head south,103.7,13.84874,100.57259
+51,สำนักหอสมุด (ตรงข้าม),You have arrived at your destination,0,13.8478,100.57258
+52,Navigation,Head south,145.2,13.8478,100.57258
+53,สถาบันวิจัยและพัฒนาแห่ง มก.,You have arrived at your destination on the left,0,13.84649,100.57257
+54,Navigation,Head south,36.6,13.84649,100.57257
+55,Navigation,Turn left,144.1,13.84616,100.57257
+56,คณะวนศาสตร์,You have arrived at your destination on the right,0,13.8461,100.5739
+57,Navigation,Head east,280.9,13.8461,100.5739
