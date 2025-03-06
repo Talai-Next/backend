@@ -1,7 +1,7 @@
 from rest_framework import generics
 from ..serializers import BusStopLocationSerializer
 from rest_framework.permissions import AllowAny
-from ..models import BusLocation
+from ..models import StationLocation
 
 
 class BusStopLocationView(generics.ListAPIView):
@@ -9,5 +9,5 @@ class BusStopLocationView(generics.ListAPIView):
     permission_classes = [AllowAny]
 
     def get_queryset(self):
-        bus_location = BusLocation.objects.all()
+        bus_location = StationLocation.objects.all()
         return bus_location

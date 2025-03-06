@@ -1,9 +1,9 @@
 from django.db import models
-from .BusLocation import BusLocation
+from .StationLocation import StationLocation
 
 class LineOneRoute(models.Model):
     order = models.PositiveIntegerField(unique=True)
-    station = models.ForeignKey(BusLocation, on_delete=models.CASCADE)
+    station = models.ForeignKey(StationLocation, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["order"]
