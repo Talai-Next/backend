@@ -1,6 +1,6 @@
 from django.db import models
 
-class BusLocation(models.Model):
+class StationLocation(models.Model):
     station_code = models.CharField(max_length=10, verbose_name="Building Code")
     name = models.CharField(max_length=255, verbose_name="Location Name")
     latitude = models.FloatField(verbose_name="Latitude")

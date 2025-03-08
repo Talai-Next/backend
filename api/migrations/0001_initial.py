@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='BusLocation',
+            name='StationLocation',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('station_code', models.CharField(max_length=10, verbose_name='Building Code')),
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('order', models.PositiveIntegerField(unique=True)),
-                ('station', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.buslocation')),
+                ('station', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.stationlocation')),
             ],
             options={
                 'ordering': ['order'],
@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('order', models.PositiveIntegerField(unique=True)),
-                ('station', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.buslocation')),
+                ('station', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.stationlocation')),
             ],
             options={
                 'ordering': ['order'],
@@ -49,18 +49,18 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('order', models.PositiveIntegerField(unique=True)),
-                ('station', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.buslocation')),
+                ('station', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.stationlocation')),
             ],
             options={
                 'ordering': ['order'],
             },
         ),
         migrations.CreateModel(
-            name='LineTwoRoute',
+            name='LineFiveRoute',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('order', models.PositiveIntegerField(unique=True)),
-                ('station', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.buslocation')),
+                ('station', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.stationlocation')),
             ],
             options={
                 'ordering': ['order'],
