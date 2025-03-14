@@ -7,6 +7,7 @@ from rest_framework.response import Response
 import math
 
 class SearchNearbyStationView(APIView):
+    """Search the nearest station to user location depend on their destination station """
     line1 = LineOneRoute.objects.all()
     line3 = LineThreeRoute.objects.all()
     line5 = LineFiveRoute.objects.all()
@@ -38,7 +39,7 @@ class SearchNearbyStationView(APIView):
             return Response({'error': 'Invalid latitude or longitude.'}, status=status.HTTP_400_BAD_REQUEST)
 
     def find_distance(self, lat1, lon1, lat2, lon2):
-        """ Find distance between 2 place on earth in meter"""
+        """ Find distance between 2 place on earth in meter."""
         # Convert decimal degrees to radians
         lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
         # Haversine formula
@@ -51,7 +52,7 @@ class SearchNearbyStationView(APIView):
         return r * c * 1000
 
     def find_nearest_station(self,lat,lon):
-        """ Find nearest station"""
+        """ Find the nearest station of all station."""
         min_distance = float("inf")
         nearest_station = None
         for i in SearchNearbyStationView.station:
@@ -62,7 +63,7 @@ class SearchNearbyStationView(APIView):
         return nearest_station
 
     def find_nearest_station_line(self,lat,lon,line):
-        """ Find nearest station"""
+        """Find the nearest station in specific line."""
         min_distance = float("inf")
         nearest_station = None
         for i in line:
@@ -74,12 +75,12 @@ class SearchNearbyStationView(APIView):
 
     def find_nearest_accessible_station(self,lat,lon,des):
         """ Find the nearest station that can reach destination station"""
-        one = LineOneRoute.objects.filter(station__id=des).exists()
-        three = LineThreeRoute.objects.filter(station__id=des).exists()
-        five = LineFiveRoute.objects.filter(station__id=des).exists()
-        special = LineSpecialRoute.objects.filter(station__id=des).exists()
-
-        existed = {"1": one,"3": three,"5": five,"s": special}
+        existed = {
+            "1": LineOneRoute.objects.filter(station__id=des).exists(),
+            "3": LineThreeRoute.objects.filter(station__id=des).exists(),
+            "5": LineFiveRoute.objects.filter(station__id=des).exists(),
+            "s": LineSpecialRoute.objects.filter(station__id=des).exists()
+        }
         line_queries = {"1": SearchNearbyStationView.line1 ,"3": SearchNearbyStationView.line3,"5": SearchNearbyStationView.line5,"s": SearchNearbyStationView.lineS}
         nearest = {}
         min_distance = float('inf')
