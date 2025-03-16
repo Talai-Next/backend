@@ -1,7 +1,6 @@
 from rest_framework import status
 from rest_framework.views import APIView
-from ..serializers import LineSpecialRouteSerializer
-from ..models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
+from ...models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
 from rest_framework.response import Response
 import math
 
@@ -25,4 +24,3 @@ class AvailableLineView(APIView):
             return Response(available_lines)
         except ValueError:
             return Response({'error': 'Invalid station ID'}, status=status.HTTP_400_BAD_REQUEST)
-

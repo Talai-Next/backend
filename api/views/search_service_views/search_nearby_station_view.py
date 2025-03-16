@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
-from ..serializers import LineSpecialRouteSerializer
-from ..models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
+from ...models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
 from rest_framework.response import Response
 import math
 
@@ -33,7 +32,6 @@ class SearchNearbyStationView(APIView):
                     'name': nearest_station.name,
                     'latitude': nearest_station.latitude,
                     'longitude': nearest_station.longitude,
-                    'line': line
                 })
         except ValueError:
             return Response({'error': 'Invalid latitude or longitude.'}, status=status.HTTP_400_BAD_REQUEST)
