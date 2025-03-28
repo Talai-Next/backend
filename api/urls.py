@@ -22,7 +22,7 @@ urlpatterns = [
     path('search/search-nearby-station/', SearchNearbyStationView.as_view()),
     path('search/available-line/', AvailableLineView.as_view()),
     path('search/available-station/', AvailableStationView.as_view()),
-    path('search/bus-route', BusRouteView.as_view()),
+    path('search/bus-route/', BusRouteView.as_view()),
     path('obstacle-marker/<str:obstacle_type>/', ObstacleMarkerView.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('buses/', proxy_buses),
