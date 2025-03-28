@@ -7,7 +7,7 @@ from ..models import LineSpecialRoute
 
 
 
-class LineSpecailRouteView(generics.ListAPIView):
+class LineSpecialRouteView(generics.ListAPIView):
     serializer_class = LineSpecialRouteSerializer
     permission_classes = [AllowAny]
 

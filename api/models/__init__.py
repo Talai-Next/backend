@@ -5,3 +5,4 @@ from .LineThreeRoute import LineThreeRoute
 from .LineSpecialRoute import LineSpecialRoute
 from .ObstaclePosition import ObstaclePosition
 from .Obstacle import ObstacleType
+from .Feedback import Feedback
