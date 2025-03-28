@@ -8,6 +8,12 @@ echo =====================================================
 echo Script started at: %BASEDIR%
 echo =====================================================
 
+:: ===== Ask for environment values =====
+echo.
+echo ===== Configure Environment Variables =====
+set /p DATABASE_URL=Enter DATABASE_URL:
+set /p DJANGO_SECRET_KEY=Enter DJANGO_SECRET_KEY:
+
 :: ===== Repo URLs =====
 set API_REPO=https://github.com/Talai-Next/talai-api
 set BACKEND_REPO=https://github.com/Talai-Next/backend
@@ -81,10 +87,11 @@ call .\venv\Scripts\activate
 echo Installing dependencies...
 pip install -r requirements.txt
 
-if exist sample.env (
-    echo Copying .env file...
-    copy /Y sample.env .env > nul
-)
+echo Creating .env file for talai-api...
+(
+    echo DATABASE_URL=%DATABASE_URL%
+    echo DJANGO_SECRET_KEY=%DJANGO_SECRET_KEY%
+) > .env
 
 echo Running database migrations...
 %PYTHON_CMD% manage.py migrate
@@ -108,10 +115,11 @@ call .\venv\Scripts\activate
 echo Installing dependencies...
 pip install -r requirements.txt
 
-if exist sample.env (
-    echo Copying .env file...
-    copy /Y sample.env .env > nul
-)
+echo Creating .env file for backend...
+(
+    echo DATABASE_URL=%DATABASE_URL%
+    echo DJANGO_SECRET_KEY=%DJANGO_SECRET_KEY%
+) > .env
 
 echo Running database migrations...
 %PYTHON_CMD% manage.py migrate
