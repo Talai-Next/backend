@@ -76,4 +76,4 @@ def get_predictions():
 
 # Start the background thread
 thread = threading.Thread(target=update_bus_data, daemon=True)
-thread.start()
+# thread.start()

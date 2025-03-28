@@ -1,19 +1,5 @@
 from django.urls import include, path
-from .views import (
-    BusStopLocationView,
-    LineSpecialRouteView,
-    LineOneRouteView,
-    LineFiveRouteView,
-    LineThreeRouteView,
-    SearchNearbyStationView,
-    AvailableLineView,
-    AvailableStationView,
-    BusRouteView,
-    ObstacleMarkerView,
-    DensityView,
-    MockupBusesLocationListView,
-    PredictedBusDataView
-)
+from .views import *
 
 urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
@@ -32,5 +18,5 @@ urlpatterns = [
     path('live-bus-data/', PredictedBusDataView.as_view()),
     path('density-data/', DensityView.as_view()),
 
-    path('get-feedback/',DensityView.as_view()),
+    path('receive-feedback/',SaveFeedbackView.as_view()),
 ]
