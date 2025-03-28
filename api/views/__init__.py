@@ -1,4 +1,4 @@
-from .bus_stop_location_view import BusStopLocationView
+from .bus_stop_location_view import BusStopLocationView, proxy_buses
 from .line_one_route import LineOneRouteView
 from .line_special_route import LineSpecialRouteView
 from .line_five_route import LineFiveRouteView
@@ -7,3 +7,5 @@ from .search_service_views import (AvailableLineView,
                                    SearchNearbyStationView,
                                    AvailableStationView,
                                    BusRouteView)
+from .obstacle_marker import ObstacleMarkerView
+

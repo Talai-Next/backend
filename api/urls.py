@@ -1,5 +1,4 @@
 from django.urls import include, path
-
 from .views import (
     BusStopLocationView,
     LineSpecialRouteView,
@@ -9,7 +8,9 @@ from .views import (
     SearchNearbyStationView,
     AvailableLineView,
     AvailableStationView,
-    BusRouteView
+    BusRouteView,
+    ObstacleMarkerView, 
+    proxy_buses
 )
 
 urlpatterns = [
@@ -22,6 +23,9 @@ urlpatterns = [
     path('search/available-line/', AvailableLineView.as_view()),
     path('search/available-station/', AvailableStationView.as_view()),
     path('search/bus-route', BusRouteView.as_view()),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('obstacle-marker/<str:obstacle_type>/', ObstacleMarkerView.as_view()),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('buses/', proxy_buses),
+
 ]
 
