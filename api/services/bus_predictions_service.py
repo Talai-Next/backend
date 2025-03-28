@@ -12,7 +12,7 @@ MOVEMENT_FACTOR = 1 / 3600  # Convert speed (km/h) to movement per second
 
 def fetch_bus_data():
     """Fetch data from external API."""
-    url = "http://127.0.0.1:7000/api/buses"
+    url = "http://127.0.0.1:8080/api/buses"
     try:
         response = requests.get(url)
         response.raise_for_status()
