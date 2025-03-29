@@ -6,3 +6,4 @@ class BusDetailSerializer(serializers.Serializer):
     latitude = serializers.FloatField()
     longitude = serializers.FloatField()
     station_id = serializers.IntegerField()
+    line = serializers.CharField()

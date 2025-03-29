@@ -4,7 +4,7 @@ from .search_service import find_nearest_station_line, find_distance
 import time
 import threading
 
-FETCH_INTERVAL = 10
+FETCH_INTERVAL = 1
 BUS_LOCATIONS = {}
 
 station = StationLocation.objects.all()
@@ -70,7 +70,8 @@ def update_bus_locations():
                 BUS_LOCATIONS[bus_id] = {
                     "latitude": lat,
                     "longitude": lon,
-                    "station_id": current_station
+                    "station_id": current_station,
+                    "line": line
                 }
             else:
                 cur_order = BUS_LOCATIONS[bus_id]["station_id"]
@@ -81,7 +82,8 @@ def update_bus_locations():
             BUS_LOCATIONS[bus_id] = {
                 "latitude": lat,
                 "longitude": lon,
-                "station_id": current_station
+                "station_id": current_station,
+                "line": line
             }
 
         time.sleep(FETCH_INTERVAL)

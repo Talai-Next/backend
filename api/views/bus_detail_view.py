@@ -21,7 +21,8 @@ class BusDetailView(APIView):
                 'bus_id': bus_id,
                 'latitude': location['latitude'],
                 'longitude': location['longitude'],
-                'station_id': location['station_id']
+                'station_id': location['station_id'],
+                'line': location['line']
             })
         serializer = BusDetailSerializer(list(data), many=True)
         return Response(serializer.data,status=status.HTTP_200_OK)
