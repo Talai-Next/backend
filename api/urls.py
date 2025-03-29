@@ -12,7 +12,8 @@ from .views import (
     ObstacleMarkerView, 
     proxy_buses,
     BusDataListView,
-    LiveBusDataView
+    LiveBusDataView,
+    BusDetailView
 )
 
 urlpatterns = [
@@ -27,6 +28,7 @@ urlpatterns = [
     path('search/available-line/', AvailableLineView.as_view()),
     path('search/available-station/', AvailableStationView.as_view()),
     path('search/bus-route/', BusRouteView.as_view()),
+    path('detail/bus/',BusDetailView.as_view()),
     path('obstacle-marker/<str:obstacle_type>/', ObstacleMarkerView.as_view()),
     path('buses/', proxy_buses),
   

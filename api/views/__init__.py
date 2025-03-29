@@ -8,5 +8,5 @@ from .search_service_views import (AvailableLineView,
                                    AvailableStationView,
                                    BusRouteView)
 from .obstacle_marker import ObstacleMarkerView
-
+from .bus_detail_view import BusDetailView
 from .bus_data_view import BusDataListView, LiveBusDataView
