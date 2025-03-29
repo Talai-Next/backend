@@ -4,4 +4,4 @@ from .line_special_serializer import LineSpecialRouteSerializer
 from .line_five_serializer import LineFiveRouteSerializer
 from .line_three_serializer import LineThreeRouteSerializer
 from .obstacle_serializer import ObstacleMarkerSerializer
-
+from .bus_serializer import BusSerializer
