@@ -1,8 +1,8 @@
 import threading
 import time
-import requests
 from geopy.distance import geodesic
 from queue import Queue
+from  .external_api_service import fetch_bus_data
 
 BUS_PREDICTIONS = {}  # Dictionary to store predictions per bus
 FETCH_INTERVAL = 10  # Fetch new data every 10 seconds
@@ -10,16 +10,6 @@ TIME_STEP = 1  # Serve one location per second
 NUM_PREDICTIONS = 10  # Number of future predictions per bus
 MOVEMENT_FACTOR = 1 / 3600  # Convert speed (km/h) to movement per second
 
-def fetch_bus_data():
-    """Fetch data from external API."""
-    url = "http://127.0.0.1:7000/api/buses"
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        return response.json()
-    except requests.RequestException as e:
-        print(f"Error fetching bus data: {e}")
-        return []
 
 def generate_predictions(bus):
     """Generate 10 future locations based on speed using geopy. (this should be AI)"""
@@ -81,6 +71,9 @@ def update_bus_data():
 
         time.sleep(FETCH_INTERVAL)
 
+def get_predictions():
+    return BUS_PREDICTIONS
+
 # Start the background thread
 thread = threading.Thread(target=update_bus_data, daemon=True)
-thread.start()
+# thread.start()

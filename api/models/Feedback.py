@@ -2,9 +2,8 @@ from django.db import models
 
 
 class Feedback(models.Model):
-    bus_station = models.ForeignKey(
-        "StationLocation", on_delete=models.CASCADE, verbose_name="Bus Station"
-    )
+    bus_id = models.IntegerField(null=True)
+    bus_line = models.CharField(null=True, max_length=3)
     passenger_density = models.IntegerField(
         verbose_name="Passenger Density",
         choices=[
@@ -16,6 +15,3 @@ class Feedback(models.Model):
         ],
     )
     comment = models.CharField(max_length=255, verbose_name="Obstacle Type")
-
-    def __str__(self):
-        return f"{self.name}"
