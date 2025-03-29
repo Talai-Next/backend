@@ -3,10 +3,17 @@ import requests
 from .search_service import find_nearest_station_line, find_distance
 import time
 import threading
+from itertools import chain
 
 FETCH_INTERVAL = 1
 BUS_LOCATIONS = {}
-
+BUS_ARRIVAL_TIME = {}
+bus_arrival_time = {
+    "1": [],
+    "3": [],
+    "5": [],
+    "SP": []
+}
 station = StationLocation.objects.all()
 
 line_routes = {
@@ -27,7 +34,7 @@ def fetch_bus_data():
         print(f"Error fetching bus data: {e}")
         return []
 
-def find_current_station(lat,lon,line,order):
+def find_current_station(lat, lon, line, order):
     """
     Check if the bus has entered the 300m radius of the next station and update the order.
     """
@@ -42,11 +49,37 @@ def find_current_station(lat,lon,line,order):
         order = order + 1
     return order
 
+def predict_arrival_time(lat, lon, line, speed):
+    stations = line_routes[line].objects.all().order_by("order")
+    arrival_time = []
+    for i in stations:
+        distance = find_distance(lat,lon,i.station.latitude,i.station.longitude)
+        # t = s/v
+        time = f"{(distance / speed) / 60:.1f}"
+        arrival_time.append({
+            "station_id" : i.station.id,
+            "time" : time
+        })
+    bus_arrival_time[line].append(arrival_time)
+    return arrival_time
 
+def overall_arrival_time(line):
+    station_dict = {}
+    for entry in chain(*bus_arrival_time[line]):
+        station_id = entry["station_id"]
+        time = float(entry["time"])  # Convert time to int for comparison
+
+        if station_id not in station_dict or time < station_dict[station_id]["time"]:
+            station_dict[station_id] = {"station_id": station_id, "time": time}
+
+    # Convert back to list
+    result = list(station_dict.values())
+    return result
 
 def update_bus_locations():
     """ update bus current station every 10 minute """
     global BUS_LOCATIONS
+    global BUS_ARRIVAL_TIME
 
     while True:
         buses = fetch_bus_data()
@@ -56,12 +89,10 @@ def update_bus_locations():
             lat = bus.get("latitude")
             lon = bus.get("longitude")
             line = str(bus.get("line"))
-            cur_order = 0
+            speed = bus.get("speed")
 
             if bus_id is None or lat is None or lon is None or line not in line_routes:
-                print("eieie")
                 continue
-            print("yaya")
             #initailize start station
             if bus_id not in BUS_LOCATIONS:
                 start_station = find_nearest_station_line(lat, lon, line_routes[line].objects.all())
@@ -84,6 +115,15 @@ def update_bus_locations():
                 "longitude": lon,
                 "station_id": current_station,
                 "line": line
+            }
+            """
+            line :
+             time : [stationid: , time:}
+            """
+            t = predict_arrival_time(lat, lon, line, speed)
+            BUS_ARRIVAL_TIME[bus_id] = {
+                "line": line,
+                "time": overall_arrival_time(line)
             }
 
         time.sleep(FETCH_INTERVAL)
