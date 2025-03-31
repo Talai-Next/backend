@@ -38,12 +38,14 @@ def find_current_station(lat, lon, line, order):
     """
     Check if the bus has entered the 300m radius of the next station and update the order.
     """
+    is_next_station = line_routes[line].objects.filter(order=order+1)
 
-    next_station = line_routes[line].objects.get(order=order+1).station
     # if last station
-    if not next_station:
+    if not is_next_station:
         # update order to first station
         return 1
+    next_station = line_routes[line].objects.get(order=order+1).station
+
     distance = find_distance(lat,lon,next_station.latitude,next_station.longitude)
     if distance <= 300:
         order = order + 1

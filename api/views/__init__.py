@@ -6,7 +6,8 @@ from .line_three_route import LineThreeRouteView
 from .search_service_views import (AvailableLineView,
                                    SearchNearbyStationView,
                                    AvailableStationView,
-                                   BusRouteView)
+                                   BusRouteView,
+                                   SelectStationView)
 from .obstacle_marker import ObstacleMarkerView
 from .bus_detail_service_views import BusLocationView, BusArrivalTimeView
 from .bus_data_view import BusDataListView, LiveBusDataView

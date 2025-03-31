@@ -58,12 +58,12 @@ def find_available_line(cur):
 
 def find_nearest_accessible_station(lat,lon,des):
     """ Find the nearest station that can reach destination station"""
-    existed = find_nearest_station_line(des)
+    existed = find_available_line(des)
     nearest = {}
     min_distance = float('inf')
     nearest_line = ""
     for line in existed:
-        stations = line_routes[line]
+        stations = line_routes[line].objects.all()
         nearest_station = find_nearest_station_line(lat, lon, stations)
         nearest[line] = nearest_station
         distance = find_distance(lat, lon, nearest_station.latitude,nearest_station.longitude)
@@ -100,9 +100,14 @@ def find_bus_route(cur, des):
     shortest_line = ""
     available_line = cur_line.intersection(des_line)
     for line in available_line:
-        cur_order = line_routes[line].objects.get(station__id=cur).order
-        des_order = line_routes[line].objects.get(station__id=des).order
+        cur_station_routes = line_routes[line].objects.filter(station__id=cur).order_by("order")
+        des_station_routes = line_routes[line].objects.filter(station__id=des).order_by("order")
 
+        if not cur_station_routes.exists() or not des_station_routes.exists():
+            continue  # Skip this line if no valid stations exist
+
+        cur_order = cur_station_routes.first().order  # Pick the first route
+        des_order = des_station_routes.first().order
         if des_order >= cur_order:
             distance = des_order - cur_order
         else:
@@ -112,4 +117,4 @@ def find_bus_route(cur, des):
         if distance < min_distance:
             min_distance = distance
             shortest_line = line
-        return shortest_line
+    return shortest_line
