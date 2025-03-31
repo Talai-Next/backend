@@ -2,4 +2,3 @@ from .available_line_view import AvailableLineView
 from .available_station_view import AvailableStationView
 from .search_nearby_station_view import SearchNearbyStationView
 from .bus_route_views import BusRouteView
-from .select_station_view import SelectStationView
