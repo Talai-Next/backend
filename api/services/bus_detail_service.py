@@ -51,19 +51,43 @@ def find_current_station(lat, lon, line, order):
         order = order + 1
     return order
 
-def predict_arrival_time(lat, lon, line, speed):
+
+def predict_arrival_time(lat, lon, line, speed, order):
+    """Estimate arrival time from speed and distance between each station in a circular route."""
     stations = line_routes[line].objects.all().order_by("order")
+    n = line_routes[line].objects.count()
     arrival_time = []
-    for i in stations:
-        distance = find_distance(lat,lon,i.station.latitude,i.station.longitude)
+
+    # check next station
+    next_order = (order % n) + 1
+    next_station = line_routes[line].objects.filter(order=next_order).first()
+
+    total_distance = find_distance(lat, lon, next_station.station.latitude, next_station.station.longitude)
+
+    for i in range(1, n):
+        current_order = (order + i - 1) % n + 1
+        next_order = (current_order % n) + 1
+
+        current_station = line_routes[line].objects.get(order=current_order)
+        next_station = line_routes[line].objects.filter(order=next_order).first()
+
+        if next_station:
+            total_distance += find_distance(
+                current_station.station.latitude, current_station.station.longitude,
+                next_station.station.latitude, next_station.station.longitude
+            )
+
         # t = s/v
-        time = f"{(distance / speed) / 60:.1f}"
+        time = f"{(total_distance / speed) / 60:.1f}"
         arrival_time.append({
-            "station_id" : i.station.id,
-            "time" : time
+            "station_id": current_station.station.id,
+            "time": time
         })
+
     bus_arrival_time[line].append(arrival_time)
+
     return arrival_time
+
 
 def overall_arrival_time(line):
     station_dict = {}
@@ -104,10 +128,11 @@ def update_bus_locations():
                     "latitude": lat,
                     "longitude": lon,
                     "station_id": current_station,
+                    "order" : cur_order,
                     "line": line
                 }
             else:
-                cur_order = BUS_LOCATIONS[bus_id]["station_id"]
+                cur_order = BUS_LOCATIONS[bus_id]["order"]
 
             # find current station
             order = find_current_station(lat, lon, line, cur_order)
@@ -116,13 +141,14 @@ def update_bus_locations():
                 "latitude": lat,
                 "longitude": lon,
                 "station_id": current_station,
+                "order": order,
                 "line": line
             }
             """
             line :
              time : [stationid: , time:}
             """
-            t = predict_arrival_time(lat, lon, line, speed)
+            t = predict_arrival_time(lat, lon, line, speed, order)
             BUS_ARRIVAL_TIME[bus_id] = {
                 "line": line,
                 "time": overall_arrival_time(line)
