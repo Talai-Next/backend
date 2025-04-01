@@ -5,4 +5,6 @@ from .line_five_serializer import LineFiveRouteSerializer
 from .line_three_serializer import LineThreeRouteSerializer
 from .obstacle_serializer import ObstacleMarkerSerializer
 from .bus_serializer import BusSerializer
+from .bus_detail_serailizer import BusDetailSerializer
+from .bus_time_serailizer import BusTimeSerializer
 from .feedback_serializer import FeedbackSerializer
