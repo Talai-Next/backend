@@ -8,9 +8,6 @@ from .search_service_views import (AvailableLineView,
                                    AvailableStationView,
                                    BusRouteView)
 from .obstacle_marker import ObstacleMarkerView
-
 from .buses_location_view import MockupBusesLocationListView, PredictedBusDataView
 from .passenger_density_view import DensityView
 from .save_feedback_view import SaveFeedbackView
-
-# from .bus_data_view import BusDataListView, LiveBusDataView
