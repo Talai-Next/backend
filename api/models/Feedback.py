@@ -4,6 +4,7 @@ from django.db import models
 class Feedback(models.Model):
     bus_id = models.IntegerField(null=True)
     bus_line = models.CharField(null=True, max_length=3)
+    bus_stop = models.CharField(null=True, max_length=10)
     passenger_density = models.IntegerField(
         verbose_name="Passenger Density",
         choices=[
