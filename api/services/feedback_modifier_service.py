@@ -1,4 +1,3 @@
-# service.py
 from .external_api_service import fetch_bus_data
 from geopy.distance import geodesic
 from .buses_location_predictions_service import get_predictions
@@ -21,6 +20,9 @@ def feedback_modifier(data):
         if distance < min_distance:
             min_distance = distance
             closest_bus = bus
+
+    if not closest_bus:
+        raise ValueError("No closest bus found")
 
     if closest_bus:
         data["bus_id"] = int(closest_bus["bus_id"])

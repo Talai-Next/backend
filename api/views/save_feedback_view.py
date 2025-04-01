@@ -7,9 +7,14 @@ from ..services import feedback_modifier
 
 class SaveFeedbackView(APIView):
     def post(self, request, *args, **kwargs):
-        modified_data = feedback_modifier(request.data)
+        try:
+            modified_data = feedback_modifier(request.data)
+        except ValueError as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
         serializer = FeedbackSerializer(data=modified_data)
         if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'Feedback saved successfully!'}, status=status.HTTP_201_CREATED)
+            feedback_instance = serializer.save()
+            return Response(FeedbackSerializer(feedback_instance).data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
