@@ -19,7 +19,8 @@ def generate_predictions(bus):
     speed = bus.get("speed", 0)  # Speed in km/h
     direction = 90  # Assume movement east
 
-    bus_id = bus.get("id", None)
+    obj_id = bus.get("id", None) # object ID
+    bus_id = bus.get("bus_id", None) # real bus ID
     line = bus.get("line", 1)
 
     if bus_id is None:
@@ -35,7 +36,8 @@ def generate_predictions(bus):
             current_lat, current_lon = new_location.latitude, new_location.longitude
 
         predictions.append({
-            "id": bus_id,
+            "id": obj_id,
+            "bus_id": bus_id,
             "line": line,
             "latitude": round(current_lat, 6),
             "longitude": round(current_lon, 6),
