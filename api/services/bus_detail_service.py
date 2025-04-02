@@ -26,7 +26,7 @@ line_routes = {
 
 def find_current_station(lat, lon, line, order):
     """
-    Check if the bus has entered the 300m radius of the next station and update the order.
+    Check if the bus has entered the 50m radius of the next station and update the order.
     """
     is_next_station = line_routes[line].objects.filter(order=order+1)
 
@@ -37,7 +37,7 @@ def find_current_station(lat, lon, line, order):
     next_station = line_routes[line].objects.get(order=order+1).station
 
     distance = find_distance(lat,lon,next_station.latitude,next_station.longitude)
-    if distance <= 300:
+    if distance <= 50:
         order = order + 1
     return order
 
@@ -93,7 +93,7 @@ def overall_arrival_time(line):
     return result
 
 def update_bus_locations():
-    """ update bus current station every 10 minute """
+    """ update bus current station every 1 second """
     global BUS_LOCATIONS
     global BUS_ARRIVAL_TIME
 
