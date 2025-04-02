@@ -18,11 +18,11 @@ bus_arrival_time = {
 station = StationLocation.objects.all()
 
 line_routes = {
-            "1": LineOneRoute,
-            "3": LineThreeRoute,
-            "5": LineFiveRoute,
-            "SP": LineSpecialRoute
-        }
+    "1": LineOneRoute,
+    "3": LineThreeRoute,
+    "5": LineFiveRoute,
+    "SP": LineSpecialRoute
+}
 
 def find_current_station(lat, lon, line, order):
     """
@@ -113,7 +113,7 @@ def update_bus_locations():
             #initailize start station
             if obj_id not in BUS_LOCATIONS:
                 start_station = find_nearest_station_line(lat, lon, line_routes[line].objects.all())
-                cur_order = line_routes[line].objects.get(station=start_station).order
+                cur_order = line_routes[line].objects.filter(station=start_station).order_by('order').first().order
                 current_station = start_station.id
                 BUS_LOCATIONS[obj_id] = {
                     "bus_id": bus_id,
@@ -135,14 +135,11 @@ def update_bus_locations():
                 "latitude": lat,
                 "longitude": lon,
                 "station_id": current_station,
-                "order" : cur_order,
+                "order": order,
                 "line": line,
                 'speed': speed,
             }
-            """
-            line :
-            time : [stationid: , time:}
-            """
+
             t = predict_arrival_time(lat, lon, line, speed, order)
             BUS_ARRIVAL_TIME[bus_id] = {
                 "line": line,
