@@ -8,4 +8,3 @@ class BusStopLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = StationLocation
         fields = "__all__"
-        extra_kwargs = {"author": {"read_only": True}}
