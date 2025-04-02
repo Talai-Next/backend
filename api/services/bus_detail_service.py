@@ -1,3 +1,4 @@
+from . import fetch_bus_data
 from ..models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
 import requests
 from .search_service import find_nearest_station_line, find_distance
@@ -22,17 +23,6 @@ line_routes = {
             "5": LineFiveRoute,
             "SP": LineSpecialRoute
         }
-
-def fetch_bus_data():
-    """Fetch data from external API."""
-    url = "http://127.0.0.1:8080/api/buses"
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        return response.json()
-    except requests.RequestException as e:
-        print(f"Error fetching bus data: {e}")
-        return []
 
 def find_current_station(lat, lon, line, order):
     """
@@ -111,42 +101,47 @@ def update_bus_locations():
         buses = fetch_bus_data()
 
         for bus in buses:
+            obj_id = bus.get("id")
             bus_id = bus.get("bus_id")
             lat = bus.get("latitude")
             lon = bus.get("longitude")
             line = str(bus.get("line"))
             speed = bus.get("speed")
 
-            if bus_id is None or lat is None or lon is None or line not in line_routes:
+            if obj_id is None or lat is None or lon is None or line not in line_routes:
                 continue
             #initailize start station
-            if bus_id not in BUS_LOCATIONS:
+            if obj_id not in BUS_LOCATIONS:
                 start_station = find_nearest_station_line(lat, lon, line_routes[line].objects.all())
                 cur_order = line_routes[line].objects.get(station=start_station).order
                 current_station = start_station.id
-                BUS_LOCATIONS[bus_id] = {
+                BUS_LOCATIONS[obj_id] = {
+                    "bus_id": bus_id,
                     "latitude": lat,
                     "longitude": lon,
                     "station_id": current_station,
                     "order" : cur_order,
-                    "line": line
+                    "line": line,
+                    'speed': speed,
                 }
             else:
-                cur_order = BUS_LOCATIONS[bus_id]["order"]
+                cur_order = BUS_LOCATIONS[obj_id]["order"]
 
             # find current station
             order = find_current_station(lat, lon, line, cur_order)
             current_station = line_routes[line].objects.get(order=order).station.id
-            BUS_LOCATIONS[bus_id] = {
+            BUS_LOCATIONS[obj_id] = {
+                "bus_id": bus_id,
                 "latitude": lat,
                 "longitude": lon,
                 "station_id": current_station,
-                "order": order,
-                "line": line
+                "order" : cur_order,
+                "line": line,
+                'speed': speed,
             }
             """
             line :
-             time : [stationid: , time:}
+            time : [stationid: , time:}
             """
             t = predict_arrival_time(lat, lon, line, speed, order)
             BUS_ARRIVAL_TIME[bus_id] = {
