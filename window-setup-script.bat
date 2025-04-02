@@ -21,7 +21,7 @@ set FRONTEND_REPO=https://github.com/Talai-Next/frontend
 
 :: ===== Branches =====
 set API_BRANCH=master
-set BACKEND_BRANCH=predict_service
+set BACKEND_BRANCH=demo
 set FRONTEND_BRANCH=demo
 
 :: ===== Directory Names =====
@@ -29,29 +29,41 @@ set API_DIR=talai-api
 set BACKEND_DIR=backend
 set FRONTEND_DIR=frontend
 
-:: ===== Clone Repositories =====
+:: ===== Clone or Pull Repositories =====
 echo.
-echo Cloning repositories with their respective branches...
+echo Checking repositories...
 
 if not exist "%API_DIR%" (
     echo Cloning talai-api from branch %API_BRANCH%...
     git clone -b %API_BRANCH% %API_REPO% %API_DIR%
 ) else (
-    echo talai-api already exists. Skipping clone.
+    echo talai-api already exists. Pulling latest changes...
+    cd "%API_DIR%"
+    git checkout %API_BRANCH%
+    git pull origin %API_BRANCH%
+    cd ..
 )
 
 if not exist "%BACKEND_DIR%" (
     echo Cloning backend from branch %BACKEND_BRANCH%...
     git clone -b %BACKEND_BRANCH% %BACKEND_REPO% %BACKEND_DIR%
 ) else (
-    echo backend already exists. Skipping clone.
+    echo backend already exists. Pulling latest changes...
+    cd "%BACKEND_DIR%"
+    git checkout %BACKEND_BRANCH%
+    git pull origin %BACKEND_BRANCH%
+    cd ..
 )
 
 if not exist "%FRONTEND_DIR%" (
     echo Cloning frontend from branch %FRONTEND_BRANCH%...
     git clone -b %FRONTEND_BRANCH% %FRONTEND_REPO% %FRONTEND_DIR%
 ) else (
-    echo frontend already exists. Skipping clone.
+    echo frontend already exists. Pulling latest changes...
+    cd "%FRONTEND_DIR%"
+    git checkout %FRONTEND_BRANCH%
+    git pull origin %FRONTEND_BRANCH%
+    cd ..
 )
 
 :: ===== Detect Python =====
@@ -95,6 +107,9 @@ echo Creating .env file for talai-api...
 
 echo Running database migrations...
 %PYTHON_CMD% manage.py migrate
+
+echo Loading initial data: bus_data.json...
+%PYTHON_CMD% manage.py loaddata bus_data.json
 
 echo Starting talai-api server on port 8080...
 start cmd /k "%PYTHON_CMD% manage.py runserver 8080"
