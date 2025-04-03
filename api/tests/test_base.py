@@ -1,5 +1,5 @@
 from django.test import TestCase
-from api.models import *
+from api.models import StationLocation, Feedback, LineSpecialRoute, LineThreeRoute, LineFiveRoute, LineOneRoute
 
 
 class BaseTest(TestCase):
@@ -33,6 +33,15 @@ class BaseTest(TestCase):
         # Create two recent feedbacks
         Feedback.objects.create(bus_id=1, bus_line="A1", bus_stop="Stop1", passenger_density=4, comment="Crowded")
         Feedback.objects.create(bus_id=1, bus_line="A1", bus_stop="Stop2", passenger_density=2, comment="Chill")
+
+        # Create old feedback (e.g., 2 hours ago)
+        Feedback.objects.create(
+            bus_id=1,
+            bus_line="A1",
+            bus_stop="Stop1",
+            passenger_density=5,
+            comment="Old",
+        )
 
         LineOneRoute.objects.create(station=self.station_a, order=1)
         LineOneRoute.objects.create(station=self.station_b, order=2)

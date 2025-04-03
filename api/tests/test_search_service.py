@@ -1,11 +1,10 @@
-from api.models import StationLocation, LineOneRoute
 from api.services.search_service import (
     find_nearest_station,
     find_available_line,
     find_bus_route,
     find_nearest_accessible_station,
 )
-from api.tests.tests_base import BaseTest
+from api.tests.test_base import BaseTest
 
 
 class SearchServiceTest(BaseTest):
