@@ -16,6 +16,13 @@ from dotenv import load_dotenv
 import os
 from urllib.parse import urlparse
 
+from .database_settings import configure_database_settings
+import warnings
+warnings.filterwarnings(
+    'ignore',
+    message='DateTimeField .* received a naive datetime',
+    category=RuntimeWarning,
+)
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -88,18 +95,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': tmpPostgres.path.replace('/', ''),
-        'USER': tmpPostgres.username,
-        'PASSWORD': tmpPostgres.password,
-        'HOST': tmpPostgres.hostname,
-        'PORT': 5432,
-    }
-}
+DATABASES = configure_database_settings(BASE_DIR)
 
 
 # Password validation

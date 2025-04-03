@@ -148,5 +148,6 @@ def update_bus_locations():
 
         time.sleep(FETCH_INTERVAL)
 
-thread = threading.Thread(target=update_bus_locations, daemon=True)
-thread.start()
+def start_update_bus_locations():
+    thread = threading.Thread(target=update_bus_locations, daemon=True)
+    thread.start()
