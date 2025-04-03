@@ -8,10 +8,18 @@ class DensityView(APIView):
     def post(self, request, *args, **kwargs):
         bus_id = request.data.get("bus_id")
         line = request.data.get("line")
-        predicted_density = passenger_density_prediction(bus_id)
+        try:
+            predicted_density = passenger_density_prediction(bus_id)
+            return Response({
+                "bus_id": bus_id,
+                "line": line,
+                "predicted_density": predicted_density
+            }, status=status.HTTP_200_OK)
 
-        return Response({
-            "bus_id": bus_id,
-            "line": line,
-            "predicted_density": predicted_density
-        }, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({
+                "error": "Failed to predict passenger density"
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
+        

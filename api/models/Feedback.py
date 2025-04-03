@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 
 class Feedback(models.Model):
@@ -16,3 +17,4 @@ class Feedback(models.Model):
         ],
     )
     comment = models.CharField(max_length=255, verbose_name="Obstacle Type")
+    timestamp = models.DateTimeField(default=now)
