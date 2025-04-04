@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from ..models import Feedback
+from api.models import Feedback
 
 
 def passenger_density_prediction(bus_id: int) -> int | float:

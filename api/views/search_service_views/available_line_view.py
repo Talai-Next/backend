@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from ...services import find_available_line
+from api.services import find_available_line
 import logging
 
 logger = logging.getLogger(__name__)

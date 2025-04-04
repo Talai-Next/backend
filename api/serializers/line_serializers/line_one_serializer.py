@@ -1,7 +1,7 @@
-from ..models import LineOneRoute, LineSpecialRoute
+from api.models import LineOneRoute
 from rest_framework.permissions import AllowAny
 from rest_framework import serializers
-from .bus_stop_location_serializer import BusStopLocationSerializer
+from api.serializers.bus_serializer.bus_stop_location_serializer import BusStopLocationSerializer
 
 
 class LineOneRouteSerializer(serializers.ModelSerializer):

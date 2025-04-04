@@ -1,7 +1,7 @@
 from rest_framework import generics
-from ..serializers import BusStopLocationSerializer
+from api.serializers import BusStopLocationSerializer
 from rest_framework.permissions import AllowAny
-from ..models import StationLocation
+from api.models import StationLocation
 import logging
 
 logger = logging.getLogger(__name__)

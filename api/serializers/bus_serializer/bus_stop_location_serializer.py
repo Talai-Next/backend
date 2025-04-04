@@ -1,4 +1,4 @@
-from ..models import StationLocation
+from api.models import StationLocation
 from rest_framework import serializers
 
 

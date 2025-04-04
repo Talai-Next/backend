@@ -4,8 +4,8 @@ from rest_framework import status
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from ...services.bus_detail_service import BUS_ARRIVAL_TIME  # Import the BUS_LOCATIONS dictionary
-from ...serializers import BusTimeSerializer
+from api.services.bus_detail_service import BUS_ARRIVAL_TIME  # Import the BUS_LOCATIONS dictionary
+from api.serializers import BusTimeSerializer
 import logging
 
 logger = logging.getLogger(__name__)

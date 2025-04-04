@@ -34,7 +34,7 @@ class BaseTest(TestCase):
         Feedback.objects.create(bus_id=1, bus_line="A1", bus_stop="Stop1", passenger_density=4, comment="Crowded")
         Feedback.objects.create(bus_id=1, bus_line="A1", bus_stop="Stop2", passenger_density=2, comment="Chill")
 
-        # Create old feedback (e.g., 2 hours ago)
+        # Create old feedback
         Feedback.objects.create(
             bus_id=1,
             bus_line="A1",

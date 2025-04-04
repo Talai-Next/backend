@@ -1,5 +1,5 @@
-from . import fetch_bus_data
-from ..models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
+from .external_api_service import fetch_bus_data
+from api.models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
 from .search_service import find_nearest_station_line
 from geopy.distance import distance as geopy_distance
 import time
