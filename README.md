@@ -1,5 +1,3 @@
-# backend
-
 # Django Backend with RESTful API
 
 This project is a Django-based backend providing a RESTful API using the Django REST Framework (DRF).
