@@ -12,15 +12,17 @@ class BusLocationView(APIView):
     API endpoint that returns bus's closest station
     """
     def get(self, request):
-        # bus_locations = BUS_NEXT_STATION
-        # # Serialize the bus location data
-        # data = []
-        # for obj_id, location in bus_locations.items():
-        #     data.append({
-        #         'id': obj_id,
-        #         'bus_id': location['bus_id'],
-        #         'line': location['line'],
-        #     })
-        serializer = BusNextStationSerializer(list(BUS_NEXT_STATION), many=True)
+        bus_locations = BUS_NEXT_STATION
+        # Serialize the bus location data
+        data = []
+        for obj_id, detail in bus_locations.items():
+            data.append({
+                'id': obj_id,
+                'bus_id': detail['bus_id'],
+                'station_id': detail['station_id'],
+                'order': detail['order'],
+                'line': detail['line'],
+            })
+        serializer = BusNextStationSerializer(list(data), many=True)
         return Response(serializer.data,status=status.HTTP_200_OK)
 
