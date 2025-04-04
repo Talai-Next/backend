@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from ...services import find_nearest_station, find_nearest_accessible_station
+from api.services import find_nearest_station, find_nearest_accessible_station
 import logging
 
 logger = logging.getLogger(__name__)

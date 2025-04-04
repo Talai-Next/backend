@@ -1,9 +1,8 @@
-# views.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from ..serializers import FeedbackSerializer
-from ..services import feedback_modifier
+from api.serializers import FeedbackSerializer
+from api.services import feedback_modifier
 import logging
 
 logger = logging.getLogger(__name__)

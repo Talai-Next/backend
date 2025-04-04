@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 
-from ..serializers import ObstacleMarkerSerializer
-from ..models import ObstaclePosition
+from api.serializers import ObstacleMarkerSerializer
+from api.models import ObstaclePosition
 import logging
 
 logger = logging.getLogger(__name__)

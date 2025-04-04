@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from ...services import find_bus_route
+from api.services import find_bus_route
 import logging
 
 logger = logging.getLogger(__name__)

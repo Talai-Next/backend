@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
-from ..serializers import LineOneRouteSerializer
-from ..models import LineOneRoute
+from api.serializers import LineOneRouteSerializer
+from api.models import LineOneRoute
 import logging
 
 logger = logging.getLogger(__name__)

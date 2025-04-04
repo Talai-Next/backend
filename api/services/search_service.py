@@ -1,4 +1,4 @@
-from ..models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
+from api.models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
 from geopy.distance import distance as geopy_distance
 
 line1 = LineOneRoute.objects.all()

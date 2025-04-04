@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
-from ..serializers import LineFiveRouteSerializer
-from ..models import LineFiveRoute
+from api.serializers import LineFiveRouteSerializer
+from api.models import LineFiveRoute
 import logging
 
 logger = logging.getLogger(__name__)

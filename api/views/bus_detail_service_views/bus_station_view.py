@@ -1,10 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from ...serializers import BusNextStationSerializer
+from api.serializers import BusNextStationSerializer
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from ...services.bus_detail_service import BUS_NEXT_STATION  # Import the BUS_LOCATIONS dictionary
+from api.services.bus_detail_service import BUS_NEXT_STATION  # Import the BUS_LOCATIONS dictionary
 import logging
 
 logger = logging.getLogger(__name__)

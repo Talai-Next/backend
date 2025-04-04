@@ -1,4 +1,4 @@
-from ..models import ObstaclePosition
+from api.models import ObstaclePosition
 from rest_framework.permissions import AllowAny
 from rest_framework import serializers
 

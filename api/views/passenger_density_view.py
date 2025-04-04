@@ -1,8 +1,7 @@
-# views.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from ..services import passenger_density_prediction
+from api.services import passenger_density_prediction
 import logging
 
 logger = logging.getLogger(__name__)

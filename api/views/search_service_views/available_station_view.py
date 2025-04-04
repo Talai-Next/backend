@@ -1,8 +1,8 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from ...services import available_station
-from ...serializers import BusStopLocationSerializer
+from api.services import available_station
+from api.serializers import BusStopLocationSerializer
 import logging
 
 logger = logging.getLogger(__name__)
