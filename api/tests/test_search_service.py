@@ -8,7 +8,6 @@ from api.tests.test_base import BaseTest
 
 
 class SearchServiceTest(BaseTest):
-
     def test_find_nearest_station(self):
         result = find_nearest_station(13.737000, 100.523500)
         self.assertIsNotNone(result)

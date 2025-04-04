@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
-class BusSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
+
+class BusNextStationSerializer(serializers.Serializer):
     bus_id = serializers.CharField()
-    line = serializers.CharField()
     station_id = serializers.CharField()
+    order = serializers.IntegerField()
+    line = serializers.CharField()

@@ -7,3 +7,4 @@ from .obstacle_serializer import ObstacleMarkerSerializer
 from .bus_serializer import BusSerializer
 from .bus_time_serailizer import BusTimeSerializer
 from .feedback_serializer import FeedbackSerializer
+from .bus_next_station_serializer import BusNextStationSerializer
