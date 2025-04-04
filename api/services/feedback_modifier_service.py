@@ -25,7 +25,7 @@ def feedback_modifier(data):
         raise ValueError("No closest bus found")
 
     if closest_bus:
-        data["bus_id"] = int(closest_bus["bus_id"])
+        data["bus_id"] = closest_bus["bus_id"]
         data["bus_line"] = closest_bus["line"]
 
     # remove lat/lon before saving
