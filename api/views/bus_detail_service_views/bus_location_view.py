@@ -4,13 +4,13 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from ..services import fetch_bus_data, get_predictions
-from ..serializers import BusSerializer
+from api.services import fetch_bus_data, get_predictions
+from api.serializers import BusLocationSerializer
 
 
 class MockupBusesLocationListView(generics.ListAPIView):
     """Non-modify realtime data for mockup frontend."""
-    serializer_class = BusSerializer
+    serializer_class = BusLocationSerializer
     permission_classes = [AllowAny]
 
     def get_queryset(self):
@@ -27,7 +27,7 @@ class MockupBusesLocationListView(generics.ListAPIView):
 
 class PredictedBusDataView(generics.ListAPIView):
     """API view to serve predicted bus data, returning one prediction per bus per request."""
-    serializer_class = BusSerializer
+    serializer_class = BusLocationSerializer
     permission_classes = [AllowAny]
 
     def get_queryset(self):

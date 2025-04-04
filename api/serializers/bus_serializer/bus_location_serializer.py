@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-class BusSerializer(serializers.Serializer):
+class BusLocationSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     bus_id = serializers.CharField()
     line = serializers.CharField()
