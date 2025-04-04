@@ -1,13 +1,12 @@
 from . import fetch_bus_data
 from ..models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
-import requests
 from .search_service import find_nearest_station_line, find_distance
 import time
 import threading
 from itertools import chain
 
 FETCH_INTERVAL = 1
-BUS_LOCATIONS = {}
+BUS_NEXT_STATION = {}
 BUS_ARRIVAL_TIME = {}
 bus_arrival_time = {
     "1": [],
@@ -94,7 +93,7 @@ def overall_arrival_time(line):
 
 def update_bus_locations():
     """ update bus current station every 1 second """
-    global BUS_LOCATIONS
+    global BUS_NEXT_STATION
     global BUS_ARRIVAL_TIME
 
     while True:
@@ -111,33 +110,27 @@ def update_bus_locations():
             if obj_id is None or lat is None or lon is None or line not in line_routes:
                 continue
             #initailize start station
-            if obj_id not in BUS_LOCATIONS:
+            if obj_id not in BUS_NEXT_STATION:
                 start_station = find_nearest_station_line(lat, lon, line_routes[line].objects.all())
                 cur_order = line_routes[line].objects.filter(station=start_station).order_by('order').first().order
                 current_station = start_station.id
-                BUS_LOCATIONS[obj_id] = {
+                BUS_NEXT_STATION[obj_id] = {
                     "bus_id": bus_id,
-                    "latitude": lat,
-                    "longitude": lon,
                     "station_id": current_station,
                     "order" : cur_order,
                     "line": line,
-                    'speed': speed,
                 }
             else:
-                cur_order = BUS_LOCATIONS[obj_id]["order"]
+                cur_order = BUS_NEXT_STATION[obj_id]["order"]
 
             # find current station
             order = find_current_station(lat, lon, line, cur_order)
             current_station = line_routes[line].objects.get(order=order).station.id
-            BUS_LOCATIONS[obj_id] = {
+            BUS_NEXT_STATION[obj_id] = {
                 "bus_id": bus_id,
-                "latitude": lat,
-                "longitude": lon,
                 "station_id": current_station,
-                "order": order,
+                "order" : cur_order,
                 "line": line,
-                'speed': speed,
             }
 
             t = predict_arrival_time(lat, lon, line, speed, order)
