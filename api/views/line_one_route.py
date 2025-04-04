@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from rest_framework import viewsets, generics
+from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from ..serializers import LineOneRouteSerializer
 from ..models import LineOneRoute
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class LineOneRouteView(generics.ListAPIView):
@@ -11,4 +13,5 @@ class LineOneRouteView(generics.ListAPIView):
 
     def get_queryset(self):
         bus_location = LineOneRoute.objects.all()
+        logger.info(f"Line One Route data retrieved: {bus_location}")
         return bus_location
