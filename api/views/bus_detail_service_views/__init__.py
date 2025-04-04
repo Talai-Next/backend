@@ -1,3 +1,3 @@
 from .bus_station_view import BusLocationView
-from .bus_arrival_time import BusArrivalTimeView
+from .bus_arrival_time_view import BusArrivalTimeView
 from .bus_location_view import MockupBusesLocationListView,PredictedBusDataView
