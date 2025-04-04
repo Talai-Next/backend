@@ -1,10 +1,10 @@
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
-from ...models import StationLocation, LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
 from rest_framework.response import Response
-import math
 from ...services import find_nearest_station, find_nearest_accessible_station
+import logging
+
+logger = logging.getLogger(__name__)
 
 class SearchNearbyStationView(APIView):
     """Search the nearest station to user location depend on their destination station """
@@ -21,6 +21,7 @@ class SearchNearbyStationView(APIView):
             else:
                 nearest_station= find_nearest_accessible_station(lat, lon, des_id)
             if nearest_station:
+                logger.info(f"Nearest station found: {nearest_station}")
                 return Response({
                     'id': nearest_station.id,
                     'station_code': nearest_station.station_code,
@@ -28,6 +29,8 @@ class SearchNearbyStationView(APIView):
                     'latitude': nearest_station.latitude,
                     'longitude': nearest_station.longitude,
                 })
+            
         except ValueError:
+            logger.error(f"Invalid latitude or longitude: {request.query_params.get('lat')}, {request.query_params.get('lon')}")
             return Response({'error': 'Invalid latitude or longitude.'}, status=status.HTTP_400_BAD_REQUEST)
 

@@ -1,11 +1,11 @@
 from rest_framework import status
 from rest_framework.views import APIView
-from ...models import LineOneRoute, LineThreeRoute, LineFiveRoute, LineSpecialRoute
 from rest_framework.response import Response
-import requests
 from ...services import available_station
 from ...serializers import BusStopLocationSerializer
+import logging
 
+logger = logging.getLogger(__name__)
 
 class AvailableStationView(APIView):
     """ Find Available destination station that can reach by current station"""
@@ -17,8 +17,10 @@ class AvailableStationView(APIView):
 
             available_stations = available_station(cur)
             serializer = BusStopLocationSerializer(list(available_stations), many=True)
+            logger.info(f"Available stations found for station ID {cur}: {serializer.data}")
             return Response(serializer.data)
 
         except ValueError:
+            logger.error(f"Invalid station ID: {request.query_params.get('cur')}")
             return Response({'error': 'Invalid station ID'}, status=status.HTTP_400_BAD_REQUEST)
 
